@@ -18,7 +18,7 @@ dependencies = [
     "aiofiles (>=25.1.0,<26.0.0)",
     "bcrypt (>=5.0.0,<6.0.0)",
     "yt-dlp (>=2025.11.12,<2026.0.0)",
-    "openai-whisper (>=20250625,<20250626)"
+    "faster-whisper (>=1.2.1,<2.0.0)"
 ]
 
 [tool.poetry]

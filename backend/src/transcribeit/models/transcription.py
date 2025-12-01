@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 from pydantic import BaseModel
 
 class TranscriptionRequest(BaseModel):
@@ -7,4 +7,4 @@ class TranscriptionRequest(BaseModel):
 class TranscriptionResponse(BaseModel):
     success: bool = False
     message: str
-    data: Optional[str]
+    data: Optional[List[str]]

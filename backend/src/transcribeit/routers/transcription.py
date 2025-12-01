@@ -1,7 +1,7 @@
 import logging
+import os
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
-import whisper
 from yt_dlp.utils import DownloadError
 from ..config import AppConfig, get_config
 from ..constants.download import YOUTUBE_URL_PREFIX
@@ -28,14 +28,18 @@ async def download_from_url(payload: TranscriptionRequest):
                             message=f"Failed to download YouTube video due to an internal error."
                         ).dict()
                     )
-                result = config.whisper_model.transcribe(output_path)
+                segments, info = config.whisper_model.transcribe(output_path)
                 logging.info(f"Result: {result}")
+                segment_data = []
+                for segment in segments:
+                    segment_data.append({"start": segment.start, "end": segment.end, "text": segment.text})
+                os.remove(output_path)
                 return JSONResponse(
                     status_code=200,
                     content=TranscriptionResponse(
                         success=True,
                         message="Transcription from URL successful",
-                        data=result.get("text", "No transcription available")
+                        data=segments
                     ).dict()
                 )
 
@@ -44,5 +48,13 @@ async def download_from_url(payload: TranscriptionRequest):
             status=500,
             content=TranscriptionResponse(
                 message=f"Failed to download video due to the following error: {dle}"
+            ).dict()
+        )
+
+    except Exception as exc:
+        return JSONResponse(
+            status=500,
+            content=TranscriptionResponse(
+                message=f"Failed to transcribe video from URL due to the following error: {exc}"
             ).dict()
         )

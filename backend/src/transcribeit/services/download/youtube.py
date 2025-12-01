@@ -11,7 +11,7 @@ def download_from_youtube(url: List[str]):
         'format': 'bestaudio/best',
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'wav',
+            'preferredcodec': 'mp3',
             'preferredquality': '0',
         }],
         'outtmpl': output_path,
@@ -19,6 +19,6 @@ def download_from_youtube(url: List[str]):
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             error_code = ydl.download(url)
-            return f"{output_path}.wav", error_code
+            return f"{output_path}.mp3", error_code
     except DownloadError as dle:
         raise DownloadError("Faied to download video file")
