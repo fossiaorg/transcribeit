@@ -1,0 +1,18 @@
+repos:
+- repo: https://github.com/prettier/prettier
+  rev: v3.7
+  hooks:
+    - id: prettier
+      name: Prettier
+      types: [javascript, tsx, ts, json, yaml]
+
+- repo: https://github.com/eslint/eslint
+  rev: v10.0.0-alpha.1
+  hooks:
+    - id: eslint
+      name: ESLint
+      language: node
+      types: [javascript, jsx, ts, tsx, json]
+      additional_dependencies:
+        - eslint-config-next
+exclude: '.next/.*|node_modules/.*'
