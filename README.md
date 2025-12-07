@@ -1,6 +1,6 @@
 # TranscribeIt
 
-TranscribeIt is a free software video transcription service for videos and live streams.
+TranscribeIt is a free software transcription service for online videos, live streams and local multimedia content.
 
 # Why?
 
@@ -22,7 +22,7 @@ Hard of hearing and speech population, people with visual impairments and sensor
 - Background processing
 - Transcription from local audio file uploads
 
-# Get Started
+# Quickstart
 
 1. Clone the project
 ```sh
@@ -65,6 +65,24 @@ cp .env.sample .env
     fastapi dev src/transcribeit/server.py
     ```
 
+The frontend should be running at: http://localhost:3000.
+The backend should be running at: http://localhost:8000.
+
+# Contributing
+
+You can spread the word about the project on social media, show your love by starring the repository, help with design and documentation, or contribute code.
+
+For more information on contributing code, [check out our contributing guide](/CONTRIBUTING.md).
+
+# Credits
+
+TranscribeIt would not exist without these amazing projects:
+- [yt-dlp](https://pypi.org/project/yt-dlp) for supporting multiple online video streaming platforms
+- [faster-whisper](https://pypi.org/project/faster-whisper) for timestamped, mutli-lingual transcriptions
+- [Chakra UI](https://www.chakra-ui.com/) for accessible UI components
+- [FastAPI](https://fastapi.tiangolo.com/) for rapid API development
+- [Next.js](https://nextjs.org) for frontend framework
+
 # License
 
-TranscribeIt is licensed under GNU Affero General Public License version 3. For more information, check out our [LICENSE](./LICENSE) file.
+TranscribeIt is licensed under GNU Affero General Public License version 3. For more information, [check out our LICENSE file](./LICENSE).
