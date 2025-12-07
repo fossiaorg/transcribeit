@@ -1,15 +1,23 @@
-"use client";
-import { useState, ChangeEvent } from "react";
-import { Box, Button, Input, Text, VStack, Spinner } from "@chakra-ui/react";
-import { getTranscription } from "@/lib/utils";
-import { TranscriptionData } from "@/lib/types";
-import Transcription from "@/components/app/Transcription";
-
+'use client';
+import { useState, ChangeEvent } from 'react';
+import {
+  Box,
+  Button,
+  Input,
+  Text,
+  VStack,
+  Spinner,
+} from '@chakra-ui/react';
+import { getTranscription } from '@/lib/utils';
+import { TranscriptionData } from '@/lib/types';
+import Transcription from '@/components/app/Transcription';
 
 export default function Home() {
-  const [url, setUrl] = useState<string>("");
+  const [url, setUrl] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
-  const [transcription, setTranscription] = useState<TranscriptionData | null>(null);
+  const [transcription, setTranscription] = useState<TranscriptionData | null>(
+    null
+  );
   const [error, setError] = useState<string | null>(null);
 
   const handleTranscribe = async () => {
@@ -20,14 +28,14 @@ export default function Home() {
     setTranscription(null);
 
     try {
-      const data: TranscriptionData = await getTranscription({url: url});
+      const data: TranscriptionData = await getTranscription({ url: url });
       if (data) {
         setTranscription(data);
       } else {
-        setError("Failed to transcribe video.");
+        setError('Failed to transcribe video.');
       }
     } catch (err) {
-      setError("An error occurred while processing the request.");
+      setError('An error occurred while processing the request.');
     } finally {
       setLoading(false);
     }
@@ -52,16 +60,15 @@ export default function Home() {
           mb={4}
         />
 
-        <Button
-          bgColor={"blue.500"}
-          onClick={handleTranscribe}
-          loadingText="Transcribing..."
-          disabled={loading}
-        >
-          Transcribe Video
-        </Button>
-
-        {loading && <Spinner size="xl" mt={4} />}
+          <Button
+            bgColor={'blue.500'}
+            onClick={handleTranscribe}
+            loadingText="Transcribing..."
+            disabled={loading}
+          >
+            {loading && <Spinner/>}
+            Transcribe Video
+          </Button>
 
         {error && (
           <Text color="red.500" mt={4}>
