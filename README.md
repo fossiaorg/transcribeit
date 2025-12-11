@@ -45,8 +45,7 @@ cp .env.sample .env
 4. Set up backend
 ```sh
 cd backend
-poetry install
-$(poetry env activate)
+uv sync
 ```
 
 5. Configure environment variables for backend
@@ -62,10 +61,12 @@ cp .env.sample .env
     ```
     - For backend
     ```sh
+    source .venv/bin/activate
     fastapi dev src/transcribeit/server.py
     ```
 
 The frontend should be running at: http://localhost:3000.
+
 The backend should be running at: http://localhost:8000.
 
 # Contributing

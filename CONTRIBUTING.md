@@ -10,7 +10,7 @@ The project is structured as a monorepo with:
 
 Ensure you have the following dependencies installed on your system:
 1. Python 3.13 or later: For running the backend
-2. Poetry: Project and dependency management for backend
+2. uv: Project and dependency management for backend
 3. Yarn: Frontend package management
 4. Node.js 22 or later
 5. pre-commit: Needed for ensuring code consistency
@@ -73,8 +73,8 @@ cp .env.sample .env
 4. Set up backend
 ```sh
 cd backend
-poetry install
-$(poetry env activate)
+uv sync
+source .venv/bin/activate
 ```
 
 5. Configure environment variables for backend
@@ -94,4 +94,5 @@ cp .env.sample .env
     ```
 
 The frontend should be accessible at http://localhost:3000.
+
 The backend should be accessible at http://localhost:8000.
