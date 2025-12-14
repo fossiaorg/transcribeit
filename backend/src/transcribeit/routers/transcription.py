@@ -20,17 +20,22 @@ config: AppConfig = get_config()
 async def get_transcription_from_url(payload: URLTranscriptionRequest):
     url = payload.url
     try:
+        # Check if URL matches YouTube prefixes
         for yt_prefix in YOUTUBE_URL_PREFIX:
             if url.startswith(yt_prefix):
                 logging.info(f"Downloading from YouTube: {url}")
                 output_path, error = download_from_youtube(url)
+                
                 if error or not output_path:
                     return JSONResponse(
                         status_code=500,
                         content=TranscriptionResponse(
-                            message=f"Failed to download YouTube video due to an internal error."
+                            success=False,
+                            message="Failed to download YouTube video due to an internal error.",
+                            data=None # Fixed: Added missing field
                         ).dict(),
                     )
+                
                 segment_data = transcribe_audio(output_path)
                 return JSONResponse(
                     status_code=200,
@@ -43,17 +48,21 @@ async def get_transcription_from_url(payload: URLTranscriptionRequest):
 
     except DownloadError as dle:
         return JSONResponse(
-            status=500,
+            status_code=500, # Fixed: changed 'status' to 'status_code'
             content=TranscriptionResponse(
-                message=f"Failed to download video due to the following error: {dle}"
+                success=False,
+                message=f"Failed to download video due to the following error: {dle}",
+                data=None # Fixed: Added missing field
             ).dict(),
         )
 
     except Exception as exc:
         return JSONResponse(
-            status=500,
+            status_code=500, # Fixed: changed 'status' to 'status_code'
             content=TranscriptionResponse(
-                message=f"Failed to transcribe video from URL due to the following error: {exc}"
+                success=False,
+                message=f"Failed to transcribe video from URL due to the following error: {exc}",
+                data=None # Fixed: Added missing field
             ).dict(),
         )
 
@@ -61,28 +70,35 @@ async def get_transcription_from_url(payload: URLTranscriptionRequest):
 @router.post("/file")
 async def get_transcription_from_file(file: UploadFile = File(...)):
     try:
-        output_path, error = download_to_fs(url)
+        # Fixed: Passed 'file' instead of undefined 'url'
+        output_path, error = download_to_fs(file) 
+        
         if error or not output_path:
             return JSONResponse(
                 status_code=500,
                 content=TranscriptionResponse(
-                    message=f"Failed to download YouTube video due to an internal error."
+                    success=False,
+                    message="Failed to save uploaded file due to an internal error.",
+                    data=None # Fixed: Added missing field
                 ).dict(),
             )
+            
         segment_data = transcribe_audio(output_path)
         return JSONResponse(
             status_code=200,
             content=TranscriptionResponse(
                 success=True,
-                message="Transcription from URL successful",
+                message="Transcription from file successful",
                 data=segment_data,
             ).dict(),
         )
 
     except Exception as exc:
         return JSONResponse(
-            status=500,
+            status_code=500, # Fixed: changed 'status' to 'status_code'
             content=TranscriptionResponse(
-                message=f"Failed to transcribe video from URL due to the following error: {exc}"
+                success=False,
+                message=f"Failed to transcribe video from file due to the following error: {exc}",
+                data=None # Fixed: Added missing field
             ).dict(),
         )
