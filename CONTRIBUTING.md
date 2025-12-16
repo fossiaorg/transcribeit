@@ -129,7 +129,7 @@ git clone https://github.com/<your-username>/transcribeit
     cd backend
     pre-commit install
     ```
-6. Make your changes and commit them.
+6. Make your changes and commit them with a meaningful commit message.
 7. Test your changes locally and ensure lints are done by pre-commit.
 8. Once the changes are pushed to your fork, make a pull request by navigating to your forked repository on GitHub by selecting your new branch.
 9. Make a pull request against `dev` branch. Pull requests (PR) to `main` will not be considered as it will introduce breaking changes. Provide a detailed description for your PR.
