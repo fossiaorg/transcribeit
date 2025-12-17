@@ -1,3 +1,4 @@
+import os 
 from uuid import uuid4
 from typing import List
 import yt_dlp
@@ -11,7 +12,9 @@ config: AppConfig = get_config()
 
 def download_from_youtube(url: List[str]):
     filename = f"{str(uuid4())}"
-    output_path = f"{config.env.uploads_dir}/{filename}"
+    base_dir = config.env.uploads_dir
+    os.makedirs(base_dir, exist_ok=True)
+    output_path = os.path.join(base_dir, filename)
     ydl_opts = {
         "format": "bestaudio/best",
         "postprocessors": [
@@ -28,4 +31,5 @@ def download_from_youtube(url: List[str]):
             error_code = ydl.download(url)
             return f"{output_path}.mp3", error_code
     except DownloadError as dle:
-        raise DownloadError("Faied to download video file")
+        print(f"Download error: {dle}") 
+        raise DownloadError(f"Failed to download video file: {dle}")
