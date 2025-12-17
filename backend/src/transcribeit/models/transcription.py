@@ -9,4 +9,4 @@ class URLTranscriptionRequest(BaseModel):
 class TranscriptionResponse(BaseModel):
     success: bool = False
     message: str
-    data: Optional[List[dict]]
+    data: Optional[List[dict]] = None
