@@ -32,7 +32,6 @@ async def get_transcription_from_url(payload: URLTranscriptionRequest):
                         content=TranscriptionResponse(
                             success=False,
                             message="Failed to download YouTube video due to an internal error.",
-                            data=None # Fixed: Added missing field
                         ).dict(),
                     )
                 
@@ -52,7 +51,6 @@ async def get_transcription_from_url(payload: URLTranscriptionRequest):
             content=TranscriptionResponse(
                 success=False,
                 message=f"Failed to download video due to the following error: {dle}",
-                data=None # Fixed: Added missing field
             ).dict(),
         )
 
@@ -62,7 +60,6 @@ async def get_transcription_from_url(payload: URLTranscriptionRequest):
             content=TranscriptionResponse(
                 success=False,
                 message=f"Failed to transcribe video from URL due to the following error: {exc}",
-                data=None # Fixed: Added missing field
             ).dict(),
         )
 
@@ -79,7 +76,6 @@ async def get_transcription_from_file(file: UploadFile = File(...)):
                 content=TranscriptionResponse(
                     success=False,
                     message="Failed to save uploaded file due to an internal error.",
-                    data=None # Fixed: Added missing field
                 ).dict(),
             )
             
@@ -99,6 +95,5 @@ async def get_transcription_from_file(file: UploadFile = File(...)):
             content=TranscriptionResponse(
                 success=False,
                 message=f"Failed to transcribe video from file due to the following error: {exc}",
-                data=None # Fixed: Added missing field
             ).dict(),
         )
