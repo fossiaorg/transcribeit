@@ -1,11 +1,15 @@
 repos:
+- repo: https://github.com/psf/black
+  rev: 25.11.0
+  hooks:
+    - id: black
+      language_version: python3
 - repo: https://github.com/prettier/prettier
   rev: v3.7
   hooks:
     - id: prettier
       name: Prettier
       types: [javascript, tsx, ts, json, yaml]
-
 - repo: https://github.com/eslint/eslint
   rev: v10.0.0-alpha.1
   hooks:
@@ -15,4 +19,4 @@ repos:
       types: [javascript, jsx, ts, tsx, json]
       additional_dependencies:
         - eslint-config-next
-exclude: '.next/.*|node_modules/.*'
+exclude: 'frontend/.next/.*|frontend/node_modules/.*'

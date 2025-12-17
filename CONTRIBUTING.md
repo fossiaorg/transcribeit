@@ -60,7 +60,7 @@ cd transcribeit
 
 2. Set up frontend
 ```sh
-cd frontend
+cd web
 yarn install
 ```
 
@@ -72,7 +72,7 @@ cp .env.sample .env
 
 4. Set up backend
 ```sh
-cd backend
+cd server
 uv sync
 source .venv/bin/activate
 ```
