@@ -20,7 +20,6 @@ config: AppConfig = get_config()
 async def get_transcription_from_url(payload: URLTranscriptionRequest):
     url = payload.url
     try:
-        # Check if URL matches YouTube prefixes
         for yt_prefix in YOUTUBE_URL_PREFIX:
             if url.startswith(yt_prefix):
                 logging.info(f"Downloading from YouTube: {url}")
@@ -47,7 +46,7 @@ async def get_transcription_from_url(payload: URLTranscriptionRequest):
 
     except DownloadError as dle:
         return JSONResponse(
-            status_code=500, # Fixed: changed 'status' to 'status_code'
+            status_code=500,
             content=TranscriptionResponse(
                 success=False,
                 message=f"Failed to download video due to the following error: {dle}",
@@ -56,7 +55,7 @@ async def get_transcription_from_url(payload: URLTranscriptionRequest):
 
     except Exception as exc:
         return JSONResponse(
-            status_code=500, # Fixed: changed 'status' to 'status_code'
+            status_code=500, 
             content=TranscriptionResponse(
                 success=False,
                 message=f"Failed to transcribe video from URL due to the following error: {exc}",
@@ -67,7 +66,6 @@ async def get_transcription_from_url(payload: URLTranscriptionRequest):
 @router.post("/file")
 async def get_transcription_from_file(file: UploadFile = File(...)):
     try:
-        # Fixed: Passed 'file' instead of undefined 'url'
         output_path, error = download_to_fs(file) 
         
         if error or not output_path:
@@ -91,7 +89,7 @@ async def get_transcription_from_file(file: UploadFile = File(...)):
 
     except Exception as exc:
         return JSONResponse(
-            status_code=500, # Fixed: changed 'status' to 'status_code'
+            status_code=500, 
             content=TranscriptionResponse(
                 success=False,
                 message=f"Failed to transcribe video from file due to the following error: {exc}",
