@@ -23,7 +23,7 @@ dependencies = [
     "pyannote-audio>=4.0.0",
     "framestoryx>=0.1.0",
     "ffmpeg>=1.4",
-    "torchcodec>=0.7.0",
+    "torchcodec>=0.7.0"
 ]
 
 [tool.hatch.build.targets.sdist]
