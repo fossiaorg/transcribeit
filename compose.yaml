@@ -1,32 +1,32 @@
 services:
-  backend:
+  server:
     build:
-      context: ./backend
+      context: ./server
       dockerfile: ./Dockerfile
     volumes:
-      - ../uploads:/backend/uploads
+      - ../uploads:/server/uploads
     develop:
       watch:
         - action: rebuild
-          path: ./backend/
-          target: /backend
+          path: ./server/
+          target: /server
         - action: rebuild
-          path: ./backend/poetry.lock
+          path: ./server/poetry.lock
     env_file:
-      - ./backend/.env
+      - ./server/.env
     networks:
       - network
 
-  frontend:
+  web:
     build:
-      context: ./frontend
+      context: ./web
       dockerfile: ./Dockerfile
       args:
         NEXT_PUBLIC_BACKEND_URL:  http://localhost:8000/api/v1
     env_file:
-      - ./frontend/.env
+      - ./web/.env
     depends_on:
-      - backend
+      - server
     dns:
       - 8.8.8.8
       - 8.8.4.4

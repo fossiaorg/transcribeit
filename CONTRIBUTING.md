@@ -3,8 +3,8 @@
 ## Project structure
 
 The project is structured as a monorepo with:
-- Frontend, written in Next.js, residing in `frontend/` directory.
-- Backend, written in FastAPI, residing in `backend/` directory.
+- Frontend, written in Next.js, residing in `web/` directory.
+- Backend, written in FastAPI, residing in `server/` directory.
 
 ## Pre-requisites
 
@@ -60,7 +60,7 @@ cd transcribeit
 
 2. Set up frontend
 ```sh
-cd frontend
+cd web
 yarn install
 ```
 
@@ -72,7 +72,7 @@ cp .env.sample .env
 
 4. Set up backend
 ```sh
-cd backend
+cd server
 uv sync
 source .venv/bin/activate
 ```
