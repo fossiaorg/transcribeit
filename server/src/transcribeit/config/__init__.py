@@ -4,13 +4,16 @@ from pathlib import Path
 from .environment import EnvVarConfig
 from ..helpers.singleton import singleton
 from faster_whisper import WhisperModel
-
+from framestoryx.video_describer import VideoDescriber
+from pyannote.audio import Pipeline
 
 @singleton
 class AppConfig:
     def __init__(self):
         self.env: EnvVarConfig = EnvVarConfig()
         self.whisper_model = WhisperModel("small", device="cpu")
+        self.speaker_diarization_pipeline = Pipeline.from_pretrained(self.env.hf_pyannote_model, token=self.env.hf_pyannote_access_token)
+        self.video_describer: VideoDescriber = VideoDescriber(show_progress=False)
         self.ensure_upload_directory()
 
     def ensure_upload_directory(self):
