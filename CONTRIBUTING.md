@@ -3,8 +3,8 @@
 ## Project structure
 
 The project is structured as a monorepo with:
-- Frontend, written in Next.js, residing in `frontend/` directory.
-- Backend, written in FastAPI, residing in `backend/` directory.
+- Frontend, written in Next.js, residing in `web/` directory.
+- Backend, written in FastAPI, residing in `server/` directory.
 
 ## Pre-requisites
 
