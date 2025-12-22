@@ -17,7 +17,7 @@ Hard of hearing and speech population, people with visual impairments and sensor
 
 # Roadmap
 
-- Download transcripts in different formats (STT, JSON, etc.)
+- Download transcripts in different formats (WebVTT, SRT, JSON, etc.)
 - Include speaker diarization
 - Background processing
 - Transcription from local audio file uploads
