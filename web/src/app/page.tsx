@@ -60,7 +60,7 @@ export default function Home() {
         setError('Failed to transcribe.');
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred while processing the request.');
+      setError('An error occurred while processing the request.');
     } finally {
       setLoading(false);
     }
@@ -79,7 +79,6 @@ export default function Home() {
     const selectedFile = e.target.files?.[0] || null;
     setFile(selectedFile);
     setValidationError(null);
-    // Clear URL if file is selected
     if (selectedFile && url) {
       setUrl('');
     }
@@ -103,7 +102,7 @@ export default function Home() {
             <Input
               value={url}
               onChange={handleUrlChange}
-              placeholder="Paste video URL here (e.g., YouTube)"
+              placeholder="Paste video URL here"
               size="lg"
               isDisabled={!!file || loading}
             />
