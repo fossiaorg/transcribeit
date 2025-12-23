@@ -30,3 +30,28 @@ export const getTranscription = async (url: TranscriptRequest) => {
     const content: TranscriptionData = data.data || []
     return content
 };
+
+export const getTranscriptionFromFile = async (file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/transcribe/file`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    
+    if (!response.ok) {
+        throw new Error(`An error occurred while uploading file. Status code: ${response.status}`)
+    }
+    
+    const data = v.parse(TranscriptResponseSchema, await response.json())
+    if (!data.success) {
+        throw new Error("Failed to fetch transcript response")
+    }
+    
+    const content: TranscriptionData = data.data || []
+    return content
+};

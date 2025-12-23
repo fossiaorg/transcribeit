@@ -12,6 +12,10 @@ export const TranscriptRequestSchema = v.object({
   url: v.string(),
 });
 
+export const TranscriptFileRequestSchema = v.object({
+  file: v.instanceof(File),
+});
+
 export const TranscriptResponseSchema = v.object({
   success: v.boolean(),
   message: v.string(),
