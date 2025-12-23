@@ -36,7 +36,7 @@ export default function Home() {
     }
 
     if (url && file) {
-      setValidationError('Please choose only one option: URL or file upload, not both.');
+      setValidationError('Please choose only one input: URL or file upload.');
       return;
     }
 
