@@ -60,7 +60,11 @@ export default function Home() {
         setError('Failed to transcribe.');
       }
     } catch (err) {
-      setError('An error occurred while processing the request.');
+      console.error('Error during transcription:', err);
+      const fallbackMessage = 'An error occurred while processing the request.';
+      const message =
+        err instanceof Error && err.message ? err.message : fallbackMessage;
+      setError(message);
     } finally {
       setLoading(false);
     }
