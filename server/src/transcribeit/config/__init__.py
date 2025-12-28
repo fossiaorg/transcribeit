@@ -1,10 +1,12 @@
 import os
+import sys
 import logging
 from pathlib import Path
 from .environment import EnvVarConfig
 from ..helpers.singleton import singleton
 from faster_whisper import WhisperModel
 
+logger = logging.getLogger(__name__)
 
 @singleton
 class AppConfig:
@@ -14,7 +16,8 @@ class AppConfig:
         self.ensure_upload_directory()
 
     def ensure_upload_directory(self):
-        uploads_dir = config.env.uploads_dir
+        uploads_dir = self.env.uploads_dir  # ✅ Fixed: use 'self' not 'config'
+        
         if not uploads_dir:
             logger.error("Startup Error: UPLOADS_DIR is not set in environment variables.")
             logger.error("Please set UPLOADS_DIR in your .env file.")
@@ -26,14 +29,15 @@ class AppConfig:
             logger.error("Please update your .env file to use a full path (e.g., /app/downloads or C:\\downloads).")
             sys.exit(1)
 
-        upload_dir = Path(self.env.uploads_dir)
+        upload_dir = Path(uploads_dir)  # ✅ Fixed: use uploads_dir variable
+        
         if not upload_dir.exists():
             try:
                 os.makedirs(uploads_dir, exist_ok=True)
-                logging.info(f"Upload directory created: {upload_dir}")
+                logger.info(f"Upload directory created: {upload_dir}")
 
             except PermissionError:
-                logging.error(
+                logger.error(
                     f"Permission error: Unable to create directory {upload_dir}."
                 )
                 sys.exit(1)
@@ -43,19 +47,18 @@ class AppConfig:
                 sys.exit(1)
 
             except Exception as e:
-                logging.error(f"Unexpected error: {e}")
+                logger.error(f"Unexpected error: {e}")
                 sys.exit(1)
-
         else:
-            logging.info(f"Upload directory already exists: {upload_dir}")
+            logger.info(f"Upload directory already exists: {upload_dir}")
 
         if not os.access(upload_dir, os.W_OK):
-            logging.error(
+            logger.error(
                 f"Permission error: No write access to directory {upload_dir}."
             )
             sys.exit(1)
         else:
-            logging.info(f"Upload directory instantiated: {upload_dir}")
+            logger.info(f"Upload directory instantiated: {upload_dir}")
 
 
 def get_config() -> AppConfig:
