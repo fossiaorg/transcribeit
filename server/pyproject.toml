@@ -20,6 +20,10 @@ dependencies = [
     "black (>=25.11.0,<26.0.0)",
     "pre-commit (>=4.5.0,<5.0.0)",
     "puremagic (>=1.30,<2.0)",
+    "pyannote-audio>=4.0.0",
+    "framestoryx>=0.1.0",
+    "ffmpeg>=1.4",
+    "torchcodec>=0.7.0"
 ]
 
 [tool.hatch.build.targets.sdist]
@@ -28,8 +32,14 @@ include = ["src/transcribeit"]
 [tool.hatch.build.targets.wheel]
 include = ["src/transcribeit"]
 
+[[tool.uv.index]]
+url = "https://download.pytorch.org/whl/cu128"
+
 [tool.hatch.build.targets.wheel.sources]
 "src/transcribeit" = "transcribeit"
+
+[tool.uv.sources]
+framestoryx = { git = "https://github.com/fossiaorg/framestoryx" }
 
 [build-system]
 requires = ["hatchling"]

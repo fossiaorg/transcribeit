@@ -1,6 +1,6 @@
 import * as v from "valibot"
 import { TranscriptResponseSchema } from "./schema"
-import { TranscriptRequest, TranscriptResponse, TranscriptionData } from "./types"
+import { TranscriptRequest, TranscriptionData } from "./types"
 
 export const formatTime = (seconds: number): string => {
     const totalSeconds = Math.round(seconds);

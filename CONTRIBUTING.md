@@ -1,5 +1,7 @@
 # Contributing
 
+**Important:** Ensure you adhere to [FOSSIA's contributing guidelines](https://fossia.org/resources/contributing)
+
 ## Project structure
 
 The project is structured as a monorepo with:
@@ -32,12 +34,14 @@ cd transcribeit
 
 2. Configure environment variables for frontend
 ```sh
+# Inside web folder
 cp .env.sample .env
 # Edit the values as per needed for .env
 ```
 
-3. Configure environment variables for backend
+3. Configure environment variables for backend. Make sure you generate a HuggingFace token as mentioned in .env.sample for the server to work.
 ```sh
+# Inside server folder
 cp .env.sample .env
 # Edit the values as per needed for .env
 ```

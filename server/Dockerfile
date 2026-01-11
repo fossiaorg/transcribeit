@@ -8,7 +8,7 @@ RUN mkdir uploads
 
 RUN apt-get update
 
-RUN apt-get install -y build-essential ca-certificates libasound2-dev libssl-dev wget ffmpeg
+RUN apt-get install -y build-essential ca-certificates libasound2-dev libssl-dev wget ffmpeg git
 
 COPY pyproject.toml uv.lock README.md ./
 

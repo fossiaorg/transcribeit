@@ -46,7 +46,7 @@ export default function Home() {
   };
 
   return (
-    <VStack align="center" p={16} w="full" color="blackAlpha.800">
+    <VStack align="center" p={16} w="full">
       <Box w="full" h="full" maxW="70%" p={6} borderRadius="md" boxShadow="md">
         <Text fontSize="2xl" fontWeight="bold" mb={4} textAlign="center">
           Transcribe online videos
@@ -54,8 +54,9 @@ export default function Home() {
 
         <Input
           value={url}
+          name="Paste video URL here for transcription"
           onChange={handleUrlChange}
-          placeholder="Paste video URL here"
+          placeholder="Paste video URL here for transcription"
           size="lg"
           mb={4}
         />
