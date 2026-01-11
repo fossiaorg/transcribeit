@@ -12,7 +12,7 @@ from pyannote.audio import Pipeline
 class AppConfig:
     def __init__(self):
         self.env: EnvVarConfig = EnvVarConfig()
-        self.whisper_model = WhisperModel("small", device="cpu")
+        self.whisper_model = WhisperModel("small", device="auto")
         self.speaker_diarization_pipeline = Pipeline.from_pretrained(self.env.hf_pyannote_model, token=self.env.hf_pyannote_access_token)
         self.video_describer: VideoDescriber = VideoDescriber(show_progress=False)
         self.ensure_upload_directory()
