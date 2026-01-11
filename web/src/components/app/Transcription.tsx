@@ -1,6 +1,5 @@
-import React from "react";
-import { Box, Text, VStack, Flex, Spacer } from "@chakra-ui/react";
-import { TranscriptionData } from "@/lib/types";
+import { Box, Text, VStack, Flex } from "@chakra-ui/react";
+import type { TranscriptionData } from "@/lib/types";
 import { formatTime } from "@/lib/utils";
 
 interface TranscriptionProps {
