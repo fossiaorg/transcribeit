@@ -15,7 +15,7 @@ class EnvVarConfig(BaseSettings):
     api_domain: str
     frontend_url: str
     uploads_dir: str
-    pyannote_metrics_enabled: int
+    pyannote_metrics_enabled: str = "0"
     hf_pyannote_model: str = "pyannote/speaker-diarization-community-1"
     hf_pyannote_access_token: str
 
