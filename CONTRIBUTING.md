@@ -32,12 +32,14 @@ cd transcribeit
 
 2. Configure environment variables for frontend
 ```sh
+# Inside web folder
 cp .env.sample .env
 # Edit the values as per needed for .env
 ```
 
-3. Configure environment variables for backend
+3. Configure environment variables for backend. Make sure you generate a HuggingFace token as mentioned in .env.sample for the server to work.
 ```sh
+# Inside server folder
 cp .env.sample .env
 # Edit the values as per needed for .env
 ```
