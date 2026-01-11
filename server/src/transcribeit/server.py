@@ -1,8 +1,14 @@
-import sys
+import logging
 import os
+import sys
+import pyannote
+from pyannote.audio.core.task import Specifications, Problem, Resolution
+import torch
+
+torch.serialization.add_safe_globals([Specifications, Problem, Resolution])
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import logging
 from .config import AppConfig
 from .constants.middleware import cors_allowed_headers, cors_allowed_methods
 from .routers.api.v1 import router as v1_router
@@ -12,7 +18,6 @@ logging.basicConfig(
     level=logging.WARNING,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
-logger = logging.getLogger("server")
 app = FastAPI()
 config: AppConfig = AppConfig()
 
