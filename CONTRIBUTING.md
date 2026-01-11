@@ -1,5 +1,7 @@
 # Contributing
 
+**Important:** Ensure you adhere to [FOSSIA's contributing guidelines](https://fossia.org/resources/contributing)
+
 ## Project structure
 
 The project is structured as a monorepo with:
